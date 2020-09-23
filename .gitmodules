@@ -1,0 +1,3 @@
+[submodule "plugins/php-build"]
+	path = plugins/php-build
+	url = git@github.com:php-build/php-build.git

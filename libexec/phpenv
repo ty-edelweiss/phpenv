@@ -58,6 +58,10 @@ for plugin_bin in "${PHPENV_ROOT}/plugins/"*/bin; do
 done
 export PATH="${bin_path}:${PATH}"
 
+if [ "${bin_path%/*}" != "$PHPENV_ROOT" ]; then
+  # Add phpenv's own `phpenv.d` unless phpenv was cloned to PHPENV_ROOT
+  PHPENV_HOOK_PATH="${PHPENV_HOOK_PATH}:${bin_path%/*}/phpenv.d"
+fi
 hook_path="${PHPENV_HOOK_PATH}:${PHPENV_ROOT}/phpenv.d:/usr/local/etc/phpenv.d:/etc/phpenv.d:/usr/lib/phpenv/hooks"
 for plugin_hook in "${PHPENV_ROOT}/plugins/"*/etc/phpenv.d; do
   hook_path="${hook_path}:${plugin_hook}"
