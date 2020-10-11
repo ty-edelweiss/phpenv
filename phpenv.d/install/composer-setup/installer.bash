@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+set -e
+[ -n "$PHPENV_DEBUG" ] && set -x
+
 COMPOSER_BIN=composer
 
 EXPECTED_CHECKSUM="$(php -r "echo file_get_contents('https://composer.github.io/installer.sig');")"
@@ -11,6 +14,6 @@ then
     >&2 echo 'ERROR: Invalid installer checksum'
     rm composer-setup.php
 else
-    php composer-setup.php --quiet --filename="${COMPOSER_BIN}" --install-dir="${PREFIX}/bin"
+    php composer-setup.php --quiet --filename="$COMPOSER_BIN" --install-dir="$PREFIX/bin"
     rm composer-setup.php
 fi
